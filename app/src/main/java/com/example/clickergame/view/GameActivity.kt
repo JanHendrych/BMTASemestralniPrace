@@ -7,30 +7,40 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProvider
 import com.example.clickergame.R
+import com.example.clickergame.viewmodel.Game
+import com.example.clickergame.viewmodel.GameFactory
 
 class GameActivity : AppCompatActivity() {
+    private lateinit var game : Game
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        var clicks = findViewById<TextView>(R.id.healthTxt)
-        clicks.text = "0"
+        val factory = GameFactory()
+        game = ViewModelProvider(this, factory).get(Game::class.java)
+
+        var actualHealth = findViewById<TextView>(R.id.actualHealthTxt)
+        var maxHealth = findViewById<TextView>(R.id.maxHealthTxt)
+        actualHealth.text = game.activeMonster.actualHealth.toString()
+        maxHealth.text = game.activeMonster.maxHealth.toString()
 
         var monsterIMG = findViewById<ImageView>(R.id.monsterImage)
         monsterIMG.setImageResource(R.drawable.ic_launcher_background)
 
         var monsterHealth = findViewById<ProgressBar>(R.id.monsterHealth)
-        monsterHealth.max = 20
+        monsterHealth.max = game.activeMonster.maxHealth
 
         monsterIMG.setOnClickListener(){
-            var numberOfClicks = 0
-            numberOfClicks = Integer.parseInt(clicks.text.toString())
-            numberOfClicks++
-            clicks.text = numberOfClicks.toString()
+            game.gameClick()
+            monsterHealth.setProgress(game.activeMonster.maxHealth - game.activeMonster.actualHealth,true)
+            monsterHealth.max = game.activeMonster.maxHealth
 
-            monsterHealth.setProgress(numberOfClicks,true)
+            actualHealth.text = game.activeMonster.actualHealth.toString()
+            maxHealth.text = game.activeMonster.maxHealth.toString()
         }
 
     }
