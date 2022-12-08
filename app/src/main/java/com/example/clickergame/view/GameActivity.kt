@@ -32,19 +32,23 @@ class GameActivity : AppCompatActivity() {
 
         //Prisera obrazek
         var monsterIMG = findViewById<ImageView>(R.id.monsterImage)
-        monsterIMG.setImageResource(R.drawable.luck)
+        monsterIMG.setImageResource(game.activeMonster.iconRes)
+
 
         var monsterHealth = findViewById<ProgressBar>(R.id.monsterHealth)
         monsterHealth.max = game.activeMonster.maxHealth
+
 
         //Kliknuti na priseru
         monsterIMG.setOnClickListener(){
             game.gameClick()
             monsterHealth.setProgress(game.activeMonster.maxHealth - game.activeMonster.actualHealth,true)
             monsterHealth.max = game.activeMonster.maxHealth
-
             actualHealth.text = game.activeMonster.actualHealth.toString()
             maxHealth.text = game.activeMonster.maxHealth.toString()
+
+            monsterIMG.setImageResource(game.activeMonster.iconRes)
+
         }
 
     }
