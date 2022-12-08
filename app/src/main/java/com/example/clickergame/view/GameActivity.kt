@@ -32,7 +32,7 @@ class GameActivity : AppCompatActivity() {
 
         //Prisera obrazek
         var monsterIMG = findViewById<ImageView>(R.id.monsterImage)
-        monsterIMG.setImageResource(R.drawable.ic_launcher_background)
+        monsterIMG.setImageResource(R.drawable.luck)
 
         var monsterHealth = findViewById<ProgressBar>(R.id.monsterHealth)
         monsterHealth.max = game.activeMonster.maxHealth
