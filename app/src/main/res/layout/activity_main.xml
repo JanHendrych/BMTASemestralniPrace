@@ -11,20 +11,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
-        app:layout_constraintBottom_toTopOf="@+id/btnStartGame"
+        app:layout_constraintBottom_toTopOf="@+id/btnNewGame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.69" />
 
     <Button
-        android:id="@+id/btnStartGame"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnNewGame"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Start Game"
+        android:text="New Game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNewGame" />
+
+    <Button
+        android:id="@+id/btnStats"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Statistics"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnContinue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

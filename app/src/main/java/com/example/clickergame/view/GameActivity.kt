@@ -42,6 +42,7 @@ class GameActivity : AppCompatActivity() {
         //Kliknuti na priseru
         monsterIMG.setOnClickListener(){
             game.gameClick()
+            monsterIMG.requestFocus()
             monsterHealth.setProgress(game.activeMonster.maxHealth - game.activeMonster.actualHealth,true)
             monsterHealth.max = game.activeMonster.maxHealth
             actualHealth.text = game.activeMonster.actualHealth.toString()
