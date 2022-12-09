@@ -14,6 +14,7 @@ import com.example.clickergame.viewmodel.GameFactory
 
 class GameActivity : AppCompatActivity() {
     private lateinit var game : Game
+    private var playerName:String = "player"
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,7 @@ class GameActivity : AppCompatActivity() {
         //Prvni prisera
         var actualHealth = findViewById<TextView>(R.id.actualHealthTxt)
         var maxHealth = findViewById<TextView>(R.id.maxHealthTxt)
+        var coins = findViewById<TextView>(R.id.textWiCoins)
         actualHealth.text = game.activeMonster.actualHealth.toString()
         maxHealth.text = game.activeMonster.maxHealth.toString()
 
@@ -47,9 +49,8 @@ class GameActivity : AppCompatActivity() {
             monsterHealth.max = game.activeMonster.maxHealth
             actualHealth.text = game.activeMonster.actualHealth.toString()
             maxHealth.text = game.activeMonster.maxHealth.toString()
-
             monsterIMG.setImageResource(game.activeMonster.iconRes)
-
+            coins.text = game.player.money.toString()
         }
 
     }

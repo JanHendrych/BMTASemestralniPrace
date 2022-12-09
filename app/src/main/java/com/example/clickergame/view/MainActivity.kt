@@ -12,12 +12,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var startBtn = findViewById<Button>(R.id.btnNewGame)
+        var contBtn = findViewById<Button>(R.id.btnContinue)
+        var statsBtn = findViewById<Button>(R.id.btnStats)
 
-
-        startBtn.setOnClickListener(){
+        //Pokracovat ve hre
+        contBtn.setOnClickListener(){
             val i= Intent(this, GameActivity::class.java)
             startActivity(i)
         }
+
+        //zacit novou hru
+        startBtn.setOnClickListener(){
+            val i= Intent(this, NewGameActivity::class.java)
+            startActivity(i)
+        }
+
 
 
     }

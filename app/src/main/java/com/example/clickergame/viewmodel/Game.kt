@@ -4,17 +4,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.clickergame.model.Icons
 import com.example.clickergame.model.Monster
+import com.example.clickergame.model.Player
 import kotlin.math.roundToInt
+import kotlin.random.Random
 
 class Game : ViewModel() {
     var activeMonster : Monster = Monster("Peter",10,10, generateRandomImage())
-
+    var player: Player = Player("Jan", 0)
+    //TODO -> NASTAVENI JMENA ZADANE HRACEM
 
 
     fun gameClick(){
         activeMonster.actualHealth--
         if (activeMonster.actualHealth == 0){
             generateStrongerMonster()
+            player.money += generateRandomCoins()
         }
 
 
@@ -31,6 +35,11 @@ class Game : ViewModel() {
     //GENEROVANI NAHODNEHO OBRAZKU
     private fun generateRandomImage():Int{
        return Icons.values().random().imgResource
+    }
+
+    //GENEROVANI PENEZ ZA ZABITI
+    private fun generateRandomCoins():Int{
+        return Random.nextInt(1, 100)
     }
 }
 
