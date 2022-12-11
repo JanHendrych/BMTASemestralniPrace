@@ -11,8 +11,6 @@ import kotlin.random.Random
 class Game : ViewModel() {
     var activeMonster : Monster = Monster("Peter",10,10, generateRandomImage())
     var player: Player = Player("Jan", 0)
-    //TODO -> NASTAVENI JMENA ZADANE HRACEM
-
 
     fun gameClick(){
         activeMonster.actualHealth--
@@ -20,8 +18,6 @@ class Game : ViewModel() {
             generateStrongerMonster()
             player.money += generateRandomCoins()
         }
-
-
     }
 
     fun generateStrongerMonster() {

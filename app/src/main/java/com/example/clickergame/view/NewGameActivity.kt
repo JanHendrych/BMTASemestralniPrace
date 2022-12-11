@@ -1,5 +1,6 @@
 package com.example.clickergame.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -17,7 +18,10 @@ class NewGameActivity : AppCompatActivity() {
         btnStartGame.setOnClickListener(){
             var name = findViewById<TextView>(R.id.editTextPlayerName)
 
-
+            val intent = Intent(this, GameActivity::class.java).also {
+                it.putExtra("heroName", name.text.toString())
+                startActivity(it)
+            }
         }
     }
 }

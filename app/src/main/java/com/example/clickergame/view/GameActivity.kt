@@ -1,5 +1,6 @@
 package com.example.clickergame.view
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,10 +8,12 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.view.marginLeft
 import androidx.lifecycle.ViewModelProvider
 import com.example.clickergame.R
 import com.example.clickergame.viewmodel.Game
 import com.example.clickergame.viewmodel.GameFactory
+import kotlin.random.Random
 
 class GameActivity : AppCompatActivity() {
     private lateinit var game : Game
@@ -24,6 +27,10 @@ class GameActivity : AppCompatActivity() {
         //viewModel
         val factory = GameFactory()
         game = ViewModelProvider(this, factory).get(Game::class.java)
+
+        //Jmeno hrdiny
+        game.player.name = intent.getStringExtra("heroName").toString()
+        findViewById<TextView>(R.id.heroNameTxt).text = game.player.name
 
         //Prvni prisera
         var actualHealth = findViewById<TextView>(R.id.actualHealthTxt)
