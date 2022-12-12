@@ -5,12 +5,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.clickergame.model.Icons
 import com.example.clickergame.model.Monster
 import com.example.clickergame.model.Player
+import org.json.JSONObject
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
 class Game : ViewModel() {
     var activeMonster : Monster = Monster("Peter",10,10, generateRandomImage())
-    var player: Player = Player("Jan", 0)
+    var player: Player = Player("Jan", 0, 0)
 
     fun gameClick(){
         activeMonster.actualHealth--
@@ -21,6 +22,8 @@ class Game : ViewModel() {
     }
 
     fun generateStrongerMonster() {
+        player.score++
+
         activeMonster.name = "Thomas"
         var newHealth = activeMonster.maxHealth * 1.5
         activeMonster.maxHealth = newHealth.roundToInt()
@@ -36,6 +39,13 @@ class Game : ViewModel() {
     //GENEROVANI PENEZ ZA ZABITI
     private fun generateRandomCoins():Int{
         return Random.nextInt(1, 100)
+    }
+
+    fun generateJsonUser(): JSONObject {
+        return JSONObject()
+            .put("username", player.name)
+            .put("money", player.money)
+            .put("score", player.score)
     }
 }
 
