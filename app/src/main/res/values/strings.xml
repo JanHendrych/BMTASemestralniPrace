@@ -3,20 +3,26 @@
 
     <string-array name="shop_items_tittle">
         <item>ATTACK POWER</item>
-        <item>HEAL</item>
-        <item>PASSIVE</item>
-        <item>TEST04</item>
-        <item>TEST05</item>
-        <item>TEST06</item>
+        <item>HEALING</item>
+        <item>MONEY DROP LUCK</item>
+        <item>PASSIVE ATTACK</item>
+        <item>SPEED OF PASSIVE ATTACK</item>
     </string-array>
 
     <string-array name="shop_items_desc">
-        <item>STRONGER SWORD POWER</item>
-        <item>STRONGER SWORD TWO</item>
-        <item>TODO TEXT TWO</item>
-        <item>TEST04</item>
-        <item>TEST05</item>
-        <item>TEST06</item>
+        <item>Damage will increase by one.</item>
+        <item>More heal will increace.</item>
+        <item>Get more coins from death enemies.</item>
+        <item>No click, just killing.</item>
+        <item>Quicker passive attack.</item>
+    </string-array>
+
+    <string-array name="shop_items_prices">
+        <item>50</item>
+        <item>80</item>
+        <item>100</item>
+        <item>130</item>
+        <item>160</item>
     </string-array>
 
 

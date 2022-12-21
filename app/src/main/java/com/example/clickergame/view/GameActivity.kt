@@ -1,17 +1,14 @@
 package com.example.clickergame.view
 
-import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.util.JsonWriter
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.view.marginLeft
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,11 +24,12 @@ import java.io.Writer
 import java.util.LinkedList
 import kotlin.random.Random
 
-class GameActivity : AppCompatActivity() {
+class GameActivity : AppCompatActivity(), RecyclerViewInterface {
 
     private lateinit var game : Game
-    private val shopItems = LinkedList<ShopItemModel>()
-
+    private var shopItems = LinkedList<ShopItemModel>()
+    private lateinit var adapter:ShopAdapter
+    private lateinit var coins:TextView
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +45,7 @@ class GameActivity : AppCompatActivity() {
         //Prvni prisera
         var actualHealth = findViewById<TextView>(R.id.actualHealthTxt)
         var maxHealth = findViewById<TextView>(R.id.maxHealthTxt)
-        var coins = findViewById<TextView>(R.id.textWiCoins)
+        coins = findViewById<TextView>(R.id.textWiCoins)
         actualHealth.text = game.activeMonster.actualHealth.toString()
         maxHealth.text = game.activeMonster.maxHealth.toString()
 
@@ -59,14 +57,20 @@ class GameActivity : AppCompatActivity() {
         var monsterHealth = findViewById<ProgressBar>(R.id.monsterHealth)
         monsterHealth.max = game.activeMonster.maxHealth
 
+
+        //Obchod
         var recyclerView: RecyclerView = findViewById(R.id.recylerViewShop)
+
         setUpShopItems()
-        var adapter:ShopAdapter = ShopAdapter(this, shopItems)
+        game.shopItems = shopItems
+        adapter = ShopAdapter(this, shopItems, this)
        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+
         //Kliknuti na priseru
         monsterIMG.setOnClickListener(){
+
             game.gameClick()
             monsterIMG.requestFocus()
             monsterHealth.setProgress(game.activeMonster.maxHealth - game.activeMonster.actualHealth,true)
@@ -75,7 +79,8 @@ class GameActivity : AppCompatActivity() {
             maxHealth.text = game.activeMonster.maxHealth.toString()
             monsterIMG.setImageResource(game.activeMonster.iconRes)
             coins.text = game.player.money.toString()
-
+            shopItems = game.shopItems
+            adapter.notifyDataSetChanged();
             Toast.makeText(this,"1",Toast.LENGTH_LONG).show()
             saveToJson("test")
         }
@@ -108,9 +113,24 @@ class GameActivity : AppCompatActivity() {
     private fun setUpShopItems(){
         var itemsTittle = arrayOf<String>(*resources.getStringArray(R.array.shop_items_tittle))
         var itemsDespriction = arrayOf<String>(*resources.getStringArray(R.array.shop_items_desc))
+        var itemsPrices = arrayOf<String>(*resources.getStringArray(R.array.shop_items_prices))
+
         for (i in  0..itemsTittle.size-1){
-            shopItems.add(ShopItemModel(itemsTittle[i], itemsDespriction[i], 0, R.drawable.sword ))
+            shopItems.add(ShopItemModel(itemsTittle[i], itemsDespriction[i], itemsPrices[i].toInt(), R.drawable.sword ))
         }
+
+    }
+
+    override fun onItemClick(position: Int) {
+        var check:Boolean = game.buyStuffFromShop(position)
+        if (check == false){
+            Toast.makeText(this, "Not enough coins", Toast.LENGTH_SHORT).show()
+        }else{
+            adapter.notifyDataSetChanged()
+            coins.text = game.player.money.toString()
+        }
+
+
 
     }
 }

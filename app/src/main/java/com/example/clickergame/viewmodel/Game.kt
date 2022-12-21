@@ -1,20 +1,23 @@
 package com.example.clickergame.viewmodel
 
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.clickergame.model.Icons
-import com.example.clickergame.model.Monster
-import com.example.clickergame.model.Player
+import com.example.clickergame.model.*
 import org.json.JSONObject
+import java.util.*
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
+
 class Game : ViewModel() {
     var activeMonster : Monster = Monster("Peter",10,10, generateRandomImage())
-    var player: Player = Player("Jan", 0, 0,1)
+    var player: Player = Player("Jan", 0, 0, Abilities())
+    var shopItems = LinkedList<ShopItemModel>()
+
 
     fun gameClick(){
-        activeMonster.actualHealth -= player.attack
+        activeMonster.actualHealth -= player.abilities.attack
         if (activeMonster.actualHealth <= 0){
             generateStrongerMonster()
             player.money += generateRandomCoins()
@@ -26,22 +29,43 @@ class Game : ViewModel() {
 
         activeMonster.iconRes = generateRandomImage()
         if (activeMonster.iconRes.compareTo(Icons.LUCK.imgResource) == 0){
-            showShopOffer()
             generateStrongerMonster()
         }else{
             activeMonster.name = "Thomas"
             var newHealth = activeMonster.maxHealth * 1.5
             activeMonster.maxHealth = newHealth.roundToInt()
             activeMonster.actualHealth = newHealth.roundToInt()
+
         }
 
 
     }
+//Nakup vybaveni
+    fun buyStuffFromShop(position: Int):Boolean{
+        var enough:Boolean
+        if(player.money < shopItems.get(position).price){
+          enough = false
+        }else{
+            buy(position)
+            shopItems.get(position).price += 20
+           enough = true
+            println(player.abilities.toString())
 
-    private fun showShopOffer(){
-    player.attack++
-
+        }
+        return enough
     }
+
+    fun buy(position: Int){
+        when(position){
+            0 -> player.abilities.attack++
+            1 -> player.abilities.health += 10
+            2 -> player.abilities.luck++
+            3 -> player.abilities.passive = true
+            4 -> player.abilities.passiveSpeed++
+        }
+    }
+
+
 
     //GENEROVANI NAHODNEHO OBRAZKU
     private fun generateRandomImage():Int{
@@ -59,6 +83,8 @@ class Game : ViewModel() {
             .put("money", player.money)
             .put("score", player.score)
     }
+
+
 }
 
 class GameFactory (
