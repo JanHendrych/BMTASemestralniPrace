@@ -13,7 +13,10 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.view.marginLeft
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.clickergame.R
+import com.example.clickergame.model.ShopItemModel
 import com.example.clickergame.viewmodel.Game
 import com.example.clickergame.viewmodel.GameFactory
 import org.json.JSONObject
@@ -21,10 +24,13 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 import java.io.Writer
+import java.util.LinkedList
 import kotlin.random.Random
 
 class GameActivity : AppCompatActivity() {
+
     private lateinit var game : Game
+    private val shopItems = LinkedList<ShopItemModel>()
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +40,6 @@ class GameActivity : AppCompatActivity() {
         //viewModel
         val factory = GameFactory()
         game = ViewModelProvider(this, factory).get(Game::class.java)
-
         //Jmeno hrdiny
         game.player.name = intent.getStringExtra("heroName").toString()
         findViewById<TextView>(R.id.heroNameTxt).text = game.player.name
@@ -54,6 +59,11 @@ class GameActivity : AppCompatActivity() {
         var monsterHealth = findViewById<ProgressBar>(R.id.monsterHealth)
         monsterHealth.max = game.activeMonster.maxHealth
 
+        var recyclerView: RecyclerView = findViewById(R.id.recylerViewShop)
+        setUpShopItems()
+        var adapter:ShopAdapter = ShopAdapter(this, shopItems)
+       recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         //Kliknuti na priseru
         monsterIMG.setOnClickListener(){
@@ -93,5 +103,14 @@ class GameActivity : AppCompatActivity() {
         output = BufferedWriter(FileWriter(file))
         output.write(jsonString)
         output.close()
+    }
+
+    private fun setUpShopItems(){
+        var itemsTittle = arrayOf<String>(*resources.getStringArray(R.array.shop_items_tittle))
+        var itemsDespriction = arrayOf<String>(*resources.getStringArray(R.array.shop_items_desc))
+        for (i in  0..itemsTittle.size-1){
+            shopItems.add(ShopItemModel(itemsTittle[i], itemsDespriction[i], 0, R.drawable.sword ))
+        }
+
     }
 }

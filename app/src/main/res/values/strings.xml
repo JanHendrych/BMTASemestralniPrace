@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">ClickerGame</string>
+
+    <string-array name="shop_items_tittle">
+        <item>ATTACK POWER</item>
+        <item>HEAL</item>
+        <item>PASSIVE</item>
+        <item>TEST04</item>
+        <item>TEST05</item>
+        <item>TEST06</item>
+    </string-array>
+
+    <string-array name="shop_items_desc">
+        <item>STRONGER SWORD POWER</item>
+        <item>STRONGER SWORD TWO</item>
+        <item>TODO TEXT TWO</item>
+        <item>TEST04</item>
+        <item>TEST05</item>
+        <item>TEST06</item>
+    </string-array>
+
+
 </resources>

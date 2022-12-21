@@ -1,0 +1,35 @@
+package com.example.clickergame.view
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.clickergame.R
+import com.example.clickergame.model.Icons
+import com.example.clickergame.model.ShopItemModel
+import java.util.*
+
+class ShopAdapter(var context:Context, var listShop: LinkedList<ShopItemModel>): RecyclerView.Adapter<ShopViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopViewHolder {
+       var inflater:LayoutInflater = LayoutInflater.from(context)
+        var view:View = inflater.inflate(R.layout.recycler_view_shop_row, parent, false)
+
+      return ShopViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ShopViewHolder, position: Int) {
+        holder.tittle.setText(listShop.get(position).tittle)
+        holder.desc.setText((listShop.get(position).description))
+        holder.price.setText(listShop.get(position).price.toString())
+      holder.imageView.setImageResource(R.drawable.sword)
+      //  holder.imageViewCoins.setImageResource(R.drawable.scream)
+    }
+
+    override fun getItemCount(): Int {
+        return listShop.size
+    }
+
+
+}

@@ -11,11 +11,11 @@ import kotlin.random.Random
 
 class Game : ViewModel() {
     var activeMonster : Monster = Monster("Peter",10,10, generateRandomImage())
-    var player: Player = Player("Jan", 0, 0)
+    var player: Player = Player("Jan", 0, 0,1)
 
     fun gameClick(){
-        activeMonster.actualHealth--
-        if (activeMonster.actualHealth == 0){
+        activeMonster.actualHealth -= player.attack
+        if (activeMonster.actualHealth <= 0){
             generateStrongerMonster()
             player.money += generateRandomCoins()
         }
@@ -24,11 +24,23 @@ class Game : ViewModel() {
     fun generateStrongerMonster() {
         player.score++
 
-        activeMonster.name = "Thomas"
-        var newHealth = activeMonster.maxHealth * 1.5
-        activeMonster.maxHealth = newHealth.roundToInt()
-        activeMonster.actualHealth = newHealth.roundToInt()
         activeMonster.iconRes = generateRandomImage()
+        if (activeMonster.iconRes.compareTo(Icons.LUCK.imgResource) == 0){
+            showShopOffer()
+            generateStrongerMonster()
+        }else{
+            activeMonster.name = "Thomas"
+            var newHealth = activeMonster.maxHealth * 1.5
+            activeMonster.maxHealth = newHealth.roundToInt()
+            activeMonster.actualHealth = newHealth.roundToInt()
+        }
+
+
+    }
+
+    private fun showShopOffer(){
+    player.attack++
+
     }
 
     //GENEROVANI NAHODNEHO OBRAZKU
