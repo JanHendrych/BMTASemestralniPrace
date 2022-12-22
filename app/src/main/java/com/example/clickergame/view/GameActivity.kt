@@ -64,7 +64,7 @@ class GameActivity : AppCompatActivity(), RecyclerViewInterface {
         setUpShopItems()
         game.shopItems = shopItems
         adapter = ShopAdapter(this, shopItems, this)
-       recyclerView.adapter = adapter
+        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
@@ -81,8 +81,9 @@ class GameActivity : AppCompatActivity(), RecyclerViewInterface {
             coins.text = game.player.money.toString()
             shopItems = game.shopItems
             adapter.notifyDataSetChanged();
-            Toast.makeText(this,"1",Toast.LENGTH_LONG).show()
-            saveToJson("test")
+
+            //Toast.makeText(this,"1",Toast.LENGTH_LONG).show()
+            //saveToJson("test")
         }
     }
 
@@ -96,7 +97,7 @@ class GameActivity : AppCompatActivity(), RecyclerViewInterface {
     }
 
     private fun saveToJson(jsonString: String) {
-        Toast.makeText(this,"2",Toast.LENGTH_LONG).show()
+        //Toast.makeText(this,"2",Toast.LENGTH_LONG).show()
 
         val output:Writer
 
@@ -129,8 +130,5 @@ class GameActivity : AppCompatActivity(), RecyclerViewInterface {
             adapter.notifyDataSetChanged()
             coins.text = game.player.money.toString()
         }
-
-
-
     }
 }

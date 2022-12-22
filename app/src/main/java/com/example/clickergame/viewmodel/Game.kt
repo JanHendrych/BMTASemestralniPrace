@@ -47,10 +47,10 @@ class Game : ViewModel() {
           enough = false
         }else{
             buy(position)
+            player.money -= shopItems.get(position).price
             shopItems.get(position).price += 20
-           enough = true
+            enough = true
             println(player.abilities.toString())
-
         }
         return enough
     }
