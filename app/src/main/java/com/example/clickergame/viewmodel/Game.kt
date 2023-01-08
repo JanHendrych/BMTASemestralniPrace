@@ -26,23 +26,20 @@ class Game : ViewModel() {
 
     fun generateStrongerMonster() {
         player.score++
-
         activeMonster.iconRes = generateRandomImage()
         if (activeMonster.iconRes.compareTo(Icons.LUCK.imgResource) == 0){
             generateStrongerMonster()
         }else{
             activeMonster.name = "Thomas"
-            var newHealth = activeMonster.maxHealth * 1.5
+            val newHealth = activeMonster.maxHealth * 1.5
             activeMonster.maxHealth = newHealth.roundToInt()
             activeMonster.actualHealth = newHealth.roundToInt()
 
         }
-
-
     }
 //Nakup vybaveni
     fun buyStuffFromShop(position: Int):Boolean{
-        var enough:Boolean
+        val enough:Boolean
         if(player.money < shopItems.get(position).price){
           enough = false
         }else{
@@ -83,8 +80,6 @@ class Game : ViewModel() {
             .put("money", player.money)
             .put("score", player.score)
     }
-
-
 }
 
 class GameFactory (

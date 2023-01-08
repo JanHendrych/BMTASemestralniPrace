@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">ClickerGame</string>
+    <string name="actualMonsterHP">TextView</string>
+    <string name="maxMonsterHP">TextView</string>
+    <string name="heroName">Hero</string>
+    <string name="coins">Coins</string>
+    <string name="btnSave">Uložit</string>
+    <string name="monster">monster</string>
 
     <string-array name="shop_items_tittle">
         <item>ATTACK POWER</item>
