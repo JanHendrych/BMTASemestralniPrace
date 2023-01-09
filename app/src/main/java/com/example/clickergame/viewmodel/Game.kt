@@ -12,12 +12,13 @@ import kotlin.random.Random
 
 class Game : ViewModel() {
     var activeMonster : Monster = Monster("Peter",10,10, generateRandomImage())
-    var player: Player = Player("Jan", 0, 0, Abilities())
+    var player: Player = Player("Jan", 0, 0, 20,Abilities())
     var shopItems = LinkedList<ShopItemModel>()
 
 
     fun gameClick(){
         activeMonster.actualHealth -= player.abilities.attack
+        damage()
         if (activeMonster.actualHealth <= 0){
             generateStrongerMonster()
             player.money += generateRandomCoins()
@@ -60,6 +61,13 @@ class Game : ViewModel() {
             3 -> player.abilities.passive = true
             4 -> player.abilities.passiveSpeed++
         }
+    }
+
+    fun damage(){
+     if(Random.nextInt(1, 7) <= 4){
+         player.health -= player.score
+     }
+
     }
 
 

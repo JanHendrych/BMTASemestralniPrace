@@ -43,6 +43,7 @@ class GameActivity : AppCompatActivity(), RecyclerViewInterface {
         coins = findViewById<TextView>(R.id.textWiCoins)
         actualHealth.text = game.activeMonster.actualHealth.toString()
         maxHealth.text = game.activeMonster.maxHealth.toString()
+        game.player.score = 1;
 
         //Prisera obrazek
         val monsterIMG = findViewById<ImageView>(R.id.monsterImage)
