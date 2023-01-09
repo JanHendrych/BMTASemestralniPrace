@@ -35,7 +35,7 @@ class Game : ViewModel() {
             val newHealth = activeMonster.maxHealth * 1.5
             activeMonster.maxHealth = newHealth.roundToInt()
             activeMonster.actualHealth = newHealth.roundToInt()
-
+            player.health += Random.nextInt(1, 10)
         }
     }
 //Nakup vybaveni
@@ -56,7 +56,7 @@ class Game : ViewModel() {
     fun buy(position: Int){
         when(position){
             0 -> player.abilities.attack++
-            1 -> player.abilities.health += 10
+            1 -> player.health += 10
             2 -> player.abilities.luck++
             3 -> player.abilities.passive = true
             4 -> player.abilities.passiveSpeed++
@@ -64,8 +64,9 @@ class Game : ViewModel() {
     }
 
     fun damage(){
-     if(Random.nextInt(1, 7) <= 4){
-         player.health -= player.score
+     if(Random.nextInt(1, 25) <= 4){
+         var damage:Double = Math.sqrt(player.score.toDouble())
+         player.health -= Math.ceil(damage).toInt()
      }
 
     }

@@ -95,6 +95,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/tvPlayerHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/zivoty"
+        app:layout_constraintEnd_toStartOf="@+id/textWiCoins"
+        app:layout_constraintStart_toEndOf="@+id/heroNameTxt"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!-- res/layout-w600dp/main_activity.xml -->
 
 

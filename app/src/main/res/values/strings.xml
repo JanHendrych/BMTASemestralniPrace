@@ -6,6 +6,18 @@
     <string name="coins">Coins</string>
     <string name="btnSave">Uložit</string>
     <string name="monster">monster</string>
+    <string name="textview">TextView</string>
+    <string name="zivoty">zivoty</string>
+    <string name="zivoty_sirka">zivoty</string>
+    <string name="continue_land">Continue</string>
+    <string name="clicker_game_land">Clicker Game</string>
+    <string name="new_game_land">New Game</string>
+    <string name="statistics_land">Statistics</string>
+    <string name="start_game_land">Start Game</string>
+    <string name="enter_your_name_land">Enter Your Name</string>
+    <string name="attack_damage">ATTACK DAMAGE</string>
+    <string name="textview_shop">TextView</string>
+    <string name="description">Description</string>
 
     <string-array name="shop_items_tittle">
         <item>ATTACK POWER</item>

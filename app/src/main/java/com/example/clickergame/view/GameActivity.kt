@@ -40,10 +40,11 @@ class GameActivity : AppCompatActivity(), RecyclerViewInterface {
         //Prvni prisera
         val actualHealth = findViewById<TextView>(R.id.actualHealthTxt)
         val maxHealth = findViewById<TextView>(R.id.maxHealthTxt)
+        val playerHealth = findViewById<TextView>(R.id.tvPlayerHealth)
         coins = findViewById<TextView>(R.id.textWiCoins)
         actualHealth.text = game.activeMonster.actualHealth.toString()
         maxHealth.text = game.activeMonster.maxHealth.toString()
-        game.player.score = 1;
+        game.player.score = 1
 
         //Prisera obrazek
         val monsterIMG = findViewById<ImageView>(R.id.monsterImage)
@@ -81,8 +82,8 @@ class GameActivity : AppCompatActivity(), RecyclerViewInterface {
 
         //Kliknuti na priseru
         monsterIMG.setOnClickListener(){
-
             game.gameClick()
+            playerHealth.text = game.player.health.toString()
             monsterIMG.requestFocus()
             monsterHealth.setProgress(game.activeMonster.maxHealth - game.activeMonster.actualHealth,true)
             monsterHealth.max = game.activeMonster.maxHealth
