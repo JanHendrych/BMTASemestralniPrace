@@ -60,6 +60,7 @@ class GameActivity : AppCompatActivity(), RecyclerViewInterface {
             game.player.abilities.passive = intent.getStringExtra("pasivniUtok").toString() == "true"
             game.player.abilities.passiveSpeed = intent.getIntExtra("PasivniUtokRychlost",1)
             game.player.score = intent.getIntExtra("Score",1)
+            game.player.health = intent.getIntExtra("zivoty",1)
 
             for (i in 0 until game.player.score-2){
                 game.generateStrongerMonster()

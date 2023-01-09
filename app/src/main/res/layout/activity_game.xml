@@ -86,11 +86,6 @@
         app:layout_constraintTop_toBottomOf="@+id/monsterHealth"
         app:layout_constraintVertical_bias="0.0" />
 
-    <!-- res/layout-w600dp/main_activity.xml -->
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
@@ -99,4 +94,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- res/layout-w600dp/main_activity.xml -->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 

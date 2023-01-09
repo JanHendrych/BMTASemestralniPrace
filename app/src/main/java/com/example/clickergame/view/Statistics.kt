@@ -24,7 +24,7 @@ class Statistics : AppCompatActivity() {
         val arrayAdapter: ArrayAdapter<*>
         val player = arrayOf(
             String.format("%35s %10s","Jméno hráče:", parseJsonString(playerText, "name")),
-            String.format("%35s %10s","Životy:", parseJsonString(playerText, "name")),
+            String.format("%35s %10s","Životy:", parseJsonString(playerText, "health")),
             String.format("%35s %10s","Peníze:", parseJsonInt(playerText, "money")),
             String.format("%35s %10s","Síla útoku:", parseJsonInt(abilities, "attack")),
             String.format("%35s %10s","Životy:", parseJsonInt(abilities, "health")),

@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, GameActivity::class.java).also {
                 it.putExtra("continue", "true")
                 it.putExtra("heroName", parseJsonString(playerText, "name"))
-                it.putExtra("zivoty", parseJsonString(playerText, "name"))
+                it.putExtra("zivoty", parseJsonString(playerText, "health"))
                 it.putExtra("penize", parseJsonInt(playerText, "money"))
                 it.putExtra("silaUtoku", parseJsonInt(abilities, "attack"))
                 it.putExtra("zivoty2", parseJsonInt(abilities, "health"))
