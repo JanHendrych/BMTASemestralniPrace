@@ -17,6 +17,7 @@ import com.google.gson.Gson
 import org.json.JSONObject
 import java.io.*
 import java.util.*
+import kotlin.concurrent.scheduleAtFixedRate
 
 
 class GameActivity : AppCompatActivity(), RecyclerViewInterface {
@@ -63,8 +64,10 @@ class GameActivity : AppCompatActivity(), RecyclerViewInterface {
             game.player.score = intent.getIntExtra("Score",1)
             game.player.health = intent.getIntExtra("zivoty",1)
 
+            println(intent.getIntExtra("zivoty",20))
+
             for (i in 0 until game.player.score-2){
-                game.generateStrongerMonster()
+                game.generateStrongerMonsterContinue()
             }
         }
 
@@ -99,6 +102,14 @@ class GameActivity : AppCompatActivity(), RecyclerViewInterface {
         btnSave.setOnClickListener(){
             saveToJson(game.generateJsonUser())
             finish()
+        }
+
+        Timer().scheduleAtFixedRate(0, 1000){
+            game.passiveAttack()
+
+            if(game.player.health <= 0){
+                game.gameFinished = true
+            }
         }
     }
 

@@ -5,5 +5,5 @@ data class Abilities(
     var health:Int = 10,
     var luck:Int = 1,
     var passive:Boolean = false,
-    var passiveSpeed:Int = 0
+    var passiveSpeed:Int = 1
 )
